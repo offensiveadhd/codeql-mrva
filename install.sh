@@ -91,6 +91,21 @@ targets_for() {
   esac
 }
 
+# A real link or nothing: Git Bash's ln -s on Windows silently *copies* unless MSYS=winsymlinks,
+# so check the result and fall back to a directory junction (no admin rights needed) there.
+link_dir() {
+  local src="$1" dst="$2"
+  if ln -s "$src" "$dst" 2>/dev/null && [[ -L "$dst" ]]; then return 0; fi
+  [[ -e "$dst" && ! -L "$dst" ]] && rm -rf "$dst"
+  if [[ "${OS:-}" == "Windows_NT" ]] && command -v cmd.exe >/dev/null 2>&1; then
+    local wsrc wdst
+    wsrc="$(cygpath -w "$src" 2>/dev/null || echo "$src")"
+    wdst="$(cygpath -w "$dst" 2>/dev/null || echo "$dst")"
+    if cmd.exe //c mklink //J "$wdst" "$wsrc" >/dev/null 2>&1 && [[ -d "$dst" ]]; then return 0; fi
+  fi
+  return 1
+}
+
 remove_existing() {
   local t="$1"
   if [[ -L "$t" ]]; then rm -f "$t"
@@ -115,9 +130,10 @@ for agent in "${LIST[@]}"; do
     mkdir -p "$(dirname "$t")"
     remove_existing "$t"
     if ((LINK)); then
-      if ln -s "$SRC" "$t" 2>/dev/null; then
+      if link_dir "$SRC" "$t"; then
         echo "$agent: linked $t -> $SRC"
       else
+        rm -rf "$t"
         cp -R "$SRC" "$t"
         echo "$agent: symlink not permitted here, copied to $t"
       fi
