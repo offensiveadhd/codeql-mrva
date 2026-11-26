@@ -89,8 +89,9 @@ and sources before modelling your own.
 
 ```bash
 python scripts/mrva_dbs.py owner/repo --language python --download dbs/ --extract
+codeql pack install my-pack          # once: resolves codeql/<lang>-all; --download alone does not
 codeql database analyze dbs/owner__repo__python my-pack/UnsafePickleVariant.ql \
-  --format=sarif-latest --output=one.sarif --download
+  --format=sarif-latest --output=one.sarif
 python scripts/mrva_sarif.py one.sarif
 ```
 
@@ -220,7 +221,11 @@ show it, and send only on their explicit go-ahead.
 - The controller repository must have at least one commit so its default
   branch exists. Public controller for public targets; private controller for
   anything private or internal. Keep it free of code: its Actions logs are
-  where failures show up, and anyone with write access can read them.
+  where failures show up. On a public controller anyone can read them, and
+  each job's log names the query, prints its description and shows the
+  result count per repository, for as long as logs are kept (90 days by
+  default). Run unpublished research from a private controller, or delete
+  the runs (`gh run delete`) once the results are downloaded.
 - Built-in Top 10/100/1000 lists exist on GitHub.com only (not `*.ghe.com`).
   Code-search lists add at most 1,000 repositories per search.
 - The pack is compiled by the action with its own CodeQL version; a query
