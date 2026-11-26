@@ -1,0 +1,48 @@
+{
+  "py-top20": [
+    "public-apis/public-apis",
+    "EbookFoundation/free-programming-books",
+    "donnemartin/system-design-primer",
+    "vinta/awesome-python",
+    "practical-tutorials/project-based-learning",
+    "NousResearch/hermes-agent",
+    "TheAlgorithms/Python",
+    "yt-dlp/yt-dlp",
+    "anthropics/skills",
+    "microsoft/markitdown",
+    "521xueweihan/HelloGitHub",
+    "Significant-Gravitas/AutoGPT",
+    "huggingface/transformers",
+    "AUTOMATIC1111/stable-diffusion-webui",
+    "langgenius/dify",
+    "langflow-ai/langflow",
+    "nextlevelbuilder/ui-ux-pro-max-skill",
+    "Graphify-Labs/graphify",
+    "github/spec-kit",
+    "langchain-ai/langchain"
+  ],
+  "demo": [
+    "public-apis/public-apis",
+    "EbookFoundation/free-programming-books",
+    "donnemartin/system-design-primer",
+    "vinta/awesome-python",
+    "practical-tutorials/project-based-learning",
+    "NousResearch/hermes-agent",
+    "TheAlgorithms/Python",
+    "yt-dlp/yt-dlp",
+    "anthropics/skills",
+    "microsoft/markitdown",
+    "521xueweihan/HelloGitHub",
+    "huggingface/transformers",
+    "AUTOMATIC1111/stable-diffusion-webui",
+    "nextlevelbuilder/ui-ux-pro-max-skill",
+    "Graphify-Labs/graphify",
+    "github/spec-kit",
+    "langchain-ai/langchain"
+  ],
+  "hits": [
+    "AUTOMATIC1111/stable-diffusion-webui",
+    "NousResearch/hermes-agent",
+    "huggingface/transformers"
+  ]
+}
