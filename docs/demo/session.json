@@ -1,0 +1,72 @@
+[
+ {
+  "cmd": "python $S/mrva_list.py top --language python --limit 20 --name py-top20 --out databases.json",
+  "out": "wrote py-top20: 20 repositories -> databases.json (gh-mrva)\n",
+  "exit": 0,
+  "secs": 2.6,
+  "at": "2026-11-25T22:25:24+00:00"
+ },
+ {
+  "cmd": "python $S/mrva_dbs.py --file databases.json --list py-top20 --language python --max-db-mb 100 --write-list demo --out databases.json",
+  "out": "repository                                  python     stars     size    age  commit\npublic-apis/public-apis                     yes       501431    0.2MB     0d  9fb3bdb62643\nEbookFoundation/free-programming-books      yes       402285    0.2MB    12d  10e33dd516cc\ndonnemartin/system-design-primer            yes       379238    0.1MB    71d  ae9bbd7b02d9\nvinta/awesome-python                        yes       337136    4.4MB     7d  4c3cb15dc695\npractical-tutorials/project-based-learning  yes       290488    0.2MB     3d  f99ea242247b\nNousResearch/hermes-agent                   yes       266094   66.1MB   180d  5e7c2ffa9ff5\nTheAlgorithms/Python                        yes       226466    6.1MB     8d  30507bbe4139\nyt-dlp/yt-dlp                               yes       210708   69.0MB     1d  da452a569fb3\nanthropics/skills                           yes       200485    1.2MB     5d  e4bb5d960d87\nmicrosoft/markitdown                        yes       198455    8.2MB     3d  ed178952a667\n521xueweihan/HelloGitHub                    yes       191248    0.1MB    21d  d65699c2892f\nSignificant-Gravitas/AutoGPT                yes       188190  336.1MB     3d  dd0b5f73266e\nhuggingface/transformers                    yes       169322   74.2MB     1d  d8f10a82213a\nAUTOMATIC1111/stable-diffusion-webui        yes       165381    2.9MB   267d  82a973c04367\nlanggenius/dify                             yes       161900  393.2MB     0d  fce5d308298f\nlangflow-ai/langflow                        yes       156943  289.9MB     1d  6c9aea6f5d5f\nnextlevelbuilder/ui-ux-pro-max-skill        yes       154177    1.7MB     5d  2de1134dc4d1\nGraphify-Labs/graphify                      yes       153350   16.5MB     1d  013a6461c31d\ngithub/spec-kit                             yes       151373   20.8MB     0d  f2010547121b\nlangchain-ai/langchain                      yes       149992   23.2MB     0d  a2d98c255a70\n20/20 repositories have a python database; 17 selected after --min-stars/--max-db-mb/--top and rename resolution\nwrote demo: 17 repositories -> databases.json (gh-mrva)\n",
+  "exit": 0,
+  "secs": 4.5,
+  "at": "2026-11-25T22:25:29+00:00"
+ },
+ {
+  "cmd": "codeql pack install docs/demo/pack",
+  "out": "Package install location: ~\\.codeql\\packages\nInstalled fresh codeql/concepts@0.0.37 (library)\nInstalled fresh codeql/controlflow@2.0.47 (library)\nInstalled fresh codeql/dataflow@2.1.19 (library)\nInstalled fresh codeql/mad@1.0.63 (library)\nInstalled fresh codeql/python-all@7.2.11 (library)\nInstalled fresh codeql/regex@1.0.63 (library)\nInstalled fresh codeql/ssa@2.0.39 (library)\nInstalled fresh codeql/threat-models@1.1.3 (library)\nInstalled fresh codeql/tutorial@1.0.63 (library)\nInstalled fresh codeql/typetracking@2.0.47 (library)\nInstalled fresh codeql/util@2.0.50 (library)\nInstalled fresh codeql/xml@1.0.63 (library)\nInstalled fresh codeql/yaml@1.0.63 (library)\nDependencies resolved. Installing packages...\nInstall location: ~\\.codeql\\packages\n",
+  "exit": 0,
+  "secs": 19.9,
+  "at": "2026-11-25T22:26:15+00:00"
+ },
+ {
+  "cmd": "python $S/mrva_dbs.py AUTOMATIC1111/stable-diffusion-webui --language python --download dbs/ --extract",
+  "out": "repository                            python     stars     size    age  commit\nAUTOMATIC1111/stable-diffusion-webui  yes       165381    2.9MB   267d  82a973c04367\n1/1 repositories have a python database\nAUTOMATIC1111/stable-diffusion-webui: dbs\\AUTOMATIC1111__stable-diffusion-webui__python\n",
+  "exit": 0,
+  "secs": 5.1,
+  "at": "2026-11-25T22:28:27+00:00"
+ },
+ {
+  "cmd": "codeql database analyze dbs/AUTOMATIC1111__stable-diffusion-webui__python docs/demo/pack/NaiveUtcCalls.ql --format=sarif-latest --output=one.sarif",
+  "out": "Running queries.\nResolving data extensions.\nFinished resolving data extensions.\nMerging data extensions.\nFinished merging data extensions.\nWARNING: Not caching stages during query-loading, since max heap size is only 1800 MB.\nCompiling query plan for docs\\demo\\pack\\NaiveUtcCalls.ql.\n[1/1] Found in cache: docs\\demo\\pack\\NaiveUtcCalls.ql.\nStarting evaluation of offensiveadhd\\mrva-demo\\NaiveUtcCalls.ql.\n[1/1 eval 19.2s] Evaluation done; writing results to offensiveadhd\\mrva-demo\\NaiveUtcCalls.bqrs.\nShutting down query evaluator.\nInterpreting results.\n",
+  "exit": 0,
+  "secs": 27.3,
+  "at": "2026-11-25T22:28:55+00:00"
+ },
+ {
+  "cmd": "python $S/mrva_sarif.py one.sarif",
+  "out": "# MRVA triage\n\n- SARIF files: 1 with findings, repositories analysed: 1, with findings: 1, findings: 3\n\n## Repositories\n\n| repository | findings | rules |\n|---|---:|---|\n| one | 3 | py/demo/naive-utc-datetime |\n\n## Rules\n\n| rule | findings | repositories |\n|---|---:|---:|\n| py/demo/naive-utc-datetime | 3 | 1 |\n\n## Findings\n\n### one (3)\n\n| location | rule | level | path | message |\n|---|---|---|---:|---|\n| extensions-builtin/Lora/ui_edit_user_metadata.py:89 | py/demo/naive-utc-datetime | note |  | datetime.utcfromtimestamp() is deprecated since Python 3.12. |\n| modules/launch_utils.py:477 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| modules/ui.py:1227 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n",
+  "exit": 0,
+  "secs": 0.7,
+  "at": "2026-11-25T22:28:56+00:00"
+ },
+ {
+  "cmd": "gh mrva submit --language python --session readme-demo --list demo --list-file databases.json --query docs/demo/pack/NaiveUtcCalls.ql",
+  "out": "Resolving demo repositories from databases.json\nSubmitting 1 queries for 17 repositories\nGenerating query pack for docs/demo/pack/NaiveUtcCalls.ql\nResolving query id for docs\\demo\\pack\\NaiveUtcCalls.ql\nMetadata: {\n  \"name\" : \"Naive UTC datetime calls\",\n  \"description\" : \"Every call to datetime.utcnow() or datetime.utcfromtimestamp(). Both are deprecated since Python 3.12 and return a naive datetime. The demo query for the README recording: a harmless pattern, so the whole MRVA loop can be shown on real repositories.\",\n  \"kind\" : \"problem\",\n  \"problem.severity\" : \"recommendation\",\n  \"precision\" : \"high\",\n  \"id\" : \"py/demo/naive-utc-datetime\",\n  \"tags\" : \"maintainability\"\n}\n\nQLPack exists, stripping all other queries from docs\\demo\\pack\nPreparing stripped QLPack in %TEMP%\\query-pack-NNN\nFixing QLPack in %TEMP%\\query-pack-NNN\nInstalling QLPack dependencies\nCompiling and bundling the QLPack (This may take a while)\nGenerated encoded bundle for docs/demo/pack/NaiveUtcCalls.ql (py/demo/naive-utc-datetime)\nDone!\n",
+  "exit": 0,
+  "secs": 143.5,
+  "at": "2026-11-25T22:32:19+00:00"
+ },
+ {
+  "cmd": "gh mrva status --session readme-demo",
+  "out": "Run name: readme-demo\nStatus: succeeded\nTotal runs: 1\nTotal successful scans: 17\nTotal failed scans: 0\nTotal skipped repositories: 0\nTotal skipped repositories due to access mismatch: 0\nTotal skipped repositories due to not found: 0\nTotal skipped repositories due to no database: 0\nTotal skipped repositories due to over limit: 0\nTotal repositories with findings: 3\nTotal findings: 11\nRepositories with findings:\n  huggingface/transformers (py/demo/naive-utc-datetime): 4\n  AUTOMATIC1111/stable-diffusion-webui (py/demo/naive-utc-datetime): 3\n  NousResearch/hermes-agent (py/demo/naive-utc-datetime): 4\n",
+  "exit": 0,
+  "secs": 1.9,
+  "at": "2026-11-25T22:37:05+00:00"
+ },
+ {
+  "cmd": "gh mrva download --session readme-demo --output-dir results/readme-demo",
+  "out": "Downloading artifacts for huggingface_transformers_29410\nDownloading artifacts for AUTOMATIC1111_stable-diffusion-webui_29410\nDownloading artifacts for NousResearch_hermes-agent_29410\nDownloaded [results\\readme-demo\\AUTOMATIC1111_stable-diffusion-webui_29410.sarif results\\readme-demo\\AUTOMATIC1111_stable-diffusion-webui_29410.bqrs]\nDownloaded artifact for AUTOMATIC1111/stable-diffusion-webui (1/3)\nDownloaded [results\\readme-demo\\NousResearch_hermes-agent_29410.sarif results\\readme-demo\\NousResearch_hermes-agent_29410.bqrs]\nDownloaded artifact for NousResearch/hermes-agent (2/3)\nDownloaded [results\\readme-demo\\huggingface_transformers_29410.sarif results\\readme-demo\\huggingface_transformers_29410.bqrs]\nDownloaded artifact for huggingface/transformers (3/3)\n3 artifacts downloaded\n",
+  "exit": 0,
+  "secs": 4.4,
+  "at": "2026-11-25T22:37:10+00:00"
+ },
+ {
+  "cmd": "python $S/mrva_sarif.py results/readme-demo --repo-list hits --out databases.json",
+  "out": "# MRVA triage\n\n- SARIF files: 3 with findings, repositories analysed: 3, with findings: 3, findings: 11\n\n## Repositories\n\n| repository | findings | rules |\n|---|---:|---|\n| huggingface/transformers | 4 | py/demo/naive-utc-datetime |\n| NousResearch/hermes-agent | 4 | py/demo/naive-utc-datetime |\n| AUTOMATIC1111/stable-diffusion-webui | 3 | py/demo/naive-utc-datetime |\n\n## Rules\n\n| rule | findings | repositories |\n|---|---:|---:|\n| py/demo/naive-utc-datetime | 11 | 3 |\n\n## Findings\n\n### huggingface/transformers (4)\n\n| location | rule | level | path | message |\n|---|---|---|---:|---|\n| scripts/stale.py:48 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| scripts/stale.py:49 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| scripts/stale.py:58 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| scripts/stale.py:59 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n\n### NousResearch/hermes-agent (4)\n\n| location | rule | level | path | message |\n|---|---|---|---:|---|\n| gateway/platforms/bluebubbles.py:396 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| gateway/platforms/bluebubbles.py:452 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| optional-skills/blockchain/hyperliquid/scripts/hyperliquid_client.py:174 | py/demo/naive-utc-datetime | note |  | datetime.utcfromtimestamp() is deprecated since Python 3.12. |\n| tui_gateway/server.py:3195 | py/demo/naive-utc-datetime | note |  | datetime.utcfromtimestamp() is deprecated since Python 3.12. |\n\n### AUTOMATIC1111/stable-diffusion-webui (3)\n\n| location | rule | level | path | message |\n|---|---|---|---:|---|\n| extensions-builtin/Lora/ui_edit_user_metadata.py:89 | py/demo/naive-utc-datetime | note |  | datetime.utcfromtimestamp() is deprecated since Python 3.12. |\n| modules/launch_utils.py:477 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\n| modules/ui.py:1227 | py/demo/naive-utc-datetime | note |  | datetime.utcnow() is deprecated since Python 3.12. |\nwrote hits: 3 repositories -> databases.json (gh-mrva)\n",
+  "exit": 0,
+  "secs": 1.4,
+  "at": "2026-11-25T22:37:12+00:00"
+ }
+]
